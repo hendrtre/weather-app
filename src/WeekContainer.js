@@ -8,12 +8,26 @@ import countries from 'i18n-iso-countries';
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
 function WeekContainer() {
+    const apiKey = '21bf93aadb83bf70aaef1b782b6095a0';
+
+    const [apiForData, setForApiData] = useState({})
+
+
+    // const forecastApiUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=51.5073&lon=-0.1277&appid=21bf93aadb83bf70aaef1b782b6095a0';
+    const forecastApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=minutely&appid=21bf93aadb83bf70aaef1b782b6095a0'
     
+    // const [apiForData, setForApiData] = useState({})
+
+    useEffect(() => {
+        fetch(forecastApiUrl)
+            .then((res) => res.json())
+            .then((data) => setForApiData(data))
+    }, [forecastApiUrl])
+
     const [apiData, setApiData] = useState({})
     const [getState, setGetState] = useState('orem')
     const [state, setState] = useState('orem')
 
-    const apiKey = '21bf93aadb83bf70aaef1b782b6095a0';
     // const apiKey = process.env.REACT_APP_API_KEY;
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${state}&appid=${apiKey}`;
 
@@ -88,20 +102,20 @@ function WeekContainer() {
                   </p>
     
                   <div className="row mt-4">
-                    {/* <div className="col-md-6">
+                    <div className="col-md-6">
                       <p>
                         <i class="fas fa-temperature-low "></i>{' '}
                         <strong>
-                          {kelvinToFarenheit(apiData.main.temp_min)}&deg; C
+                          {kelvinToFarenheit(apiData.main.temp_min)}&deg; F
                         </strong>
                       </p>
                       <p>
                         <i className="fas fa-temperature-high"></i>{' '}
                         <strong>
-                          {kelvinToFarenheit(apiData.main.temp_max)}&deg; C
+                          {kelvinToFarenheit(apiData.main.temp_max)}&deg; F
                         </strong>
                       </p>
-                    </div> */}
+                    </div>
                     <div className="col-md-6">
                       <p>
                         {' '}
@@ -122,6 +136,32 @@ function WeekContainer() {
                 <h1>Loading</h1>
               )}
             </div>
+            <h1>Hello!!!</h1>
+          </div>
+          <script>
+            var testingbreak = 123
+          </script>
+          <div>
+            <h2>Testing</h2>
+            {/* <div>{apiForData.current.temp}</div> */}
+          </div>
+          <div className='weatherForecasting'>
+              {/* {console.log(apiForData)} */}
+              {apiForData.current ? (
+                  <div className='forecast card'>
+                      <p>{apiForData.current.temp}</p>
+                      {/* <p>{apiForData.main.temp}</p> */}
+                      {/* <p>{apiForData.temp}</p> */}
+                      {/* <p>{apiForData.state.current.temp}</p> */}
+                      <strong>{apiForData.current.temp}</strong>
+                      <strong>{apiForData.current.temp}</strong>
+                      <strong>{apiForData.current.temp_max}test</strong>
+                  </div>
+              ) : (
+                  <h1>Loading Forecast</h1>
+              )}
+
+              {/* <p>{apiForData.main.temp}test</p> */}
           </div>
           <div>
               <p>hello</p>
