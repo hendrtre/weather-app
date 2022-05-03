@@ -44,6 +44,9 @@ function WeekContainer() {
     const submitHandler = () => {
         setState(getState);
     };
+    const kelvinToCelcius = (k) => {
+      return (Math.round((k-273.15) * 1.8))
+    }
 
     const kelvinToFarenheit = (k) => {
         // return ((k - 273.15) * 1.8 + 32).toFixed(2)
@@ -93,7 +96,7 @@ function WeekContainer() {
     
                   <p className="h2">
                     {/* {apiData.main.temp} */}
-                    {kelvinToFarenheit(apiData.main.temp)}&deg; F
+                    {kelvinToFarenheit(apiData.main.temp)}&deg; F / {kelvinToCelcius(apiData.main.temp)}&deg; C
                   </p>
     
                   <p className="h5">
@@ -106,12 +109,14 @@ function WeekContainer() {
                       <p>
                         <i class="fas fa-temperature-low "></i>{' '}
                         <strong>
+                          Low: 
                           {kelvinToFarenheit(apiData.main.temp_min)}&deg; F
                         </strong>
                       </p>
                       <p>
                         <i className="fas fa-temperature-high"></i>{' '}
                         <strong>
+                          High: 
                           {kelvinToFarenheit(apiData.main.temp_max)}&deg; F
                         </strong>
                       </p>
@@ -135,37 +140,46 @@ function WeekContainer() {
               ) : (
                 <h1>Loading</h1>
               )}
+              {/* {console.log(apiForData.daily.slice(0,5).map(d => (
+                d.temp.max
+              )))} */}
             </div>
-            <h1>Hello!!!</h1>
           </div>
-          <script>
-            var testingbreak = 123
-          </script>
-          <div>
-            <h2>Testing</h2>
-            {/* <div>{apiForData.current.temp}</div> */}
-          </div>
-          <div className='weatherForecasting'>
-              {/* {console.log(apiForData)} */}
+
+
+          {/* <div className='weatherForecasting'> */}
+              {/* {console.log(apiForData.daily.temp.day)} */}
+              {console.log(apiForData.daily)}
               {apiForData.current ? (
                   <div className='forecast card'>
-                      <p>{apiForData.current.temp}</p>
-                      {/* <p>{apiForData.main.temp}</p> */}
+                      {/* <p>{apiForData.current.temp}</p>
+                      <p>{kelvinToFarenheit(apiForData.current.temp)}</p> */}
                       {/* <p>{apiForData.temp}</p> */}
-                      {/* <p>{apiForData.state.current.temp}</p> */}
-                      <strong>{apiForData.current.temp}</strong>
-                      <strong>{apiForData.current.temp}</strong>
-                      <strong>{apiForData.current.temp_max}test</strong>
+                      <strong>{apiForData.daily.id}</strong>
+                      {/* <strong>{apiForData.current.temp}test</strong> */}
                   </div>
               ) : (
                   <h1>Loading Forecast</h1>
               )}
 
-              {/* <p>{apiForData.main.temp}test</p> */}
-          </div>
-          <div>
-              <p>hello</p>
-          </div>
+
+              {/* <div>
+                {apiForData.daily.slice(0,5).(d => (
+                  <div>{d.temp}</div>
+                ))}
+              </div> */}
+
+              {/* {apiForData.daily.temp((weekly) => {
+                console.log(weekly)
+                return (
+                  <div>{weekly}</div>
+                )
+              })} */}
+
+              {/* <div>{apiForData.main.temp}test</div> */}
+
+          {/* </div> */}
+
         </div>
     );
 }
