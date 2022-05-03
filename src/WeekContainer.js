@@ -1,6 +1,5 @@
-import React, { useState, Component, useEffect } from 'react';
-import { render } from "react-dom"
-import apiConfig from "./apiKeys"
+import React, { useState, useEffect } from 'react';
+// import apiConfig from "./apiKeys"
 // import axios from 'axios';  
 
 import countries from 'i18n-iso-countries';
